@@ -1,0 +1,77 @@
+version: "3"
+services:
+  discovery-service:
+    build: StationeryControl-Discovery-Service
+    image: hikozzaru/stationerycontrol-discovery
+    restart: always
+    environment:
+      - spring.profiles.active=docker
+    ports:
+      - "8081:8081"
+    networks:
+      - stationerycontrol-net
+
+  reverseproxy-service:
+    build: StationeryControl-ReverseProxy-Service
+    image: hikozzaru/stationerycontrol-reverseproxy
+    restart: always
+    environment:
+      - spring.profiles.active=docker
+    depends_on:
+      - discovery-service
+    ports:
+      - "8080:8080"
+    networks:
+      - stationerycontrol-net
+
+  user-api:
+    build: StationeryControl-User-API
+    image: hikozzaru/stationerycontrol-user-api
+    restart: always
+    environment:
+      - spring.profiles.active=docker
+    volumes:
+      - ./data:/home/spring
+    depends_on:
+      - discovery-service
+      - reverseproxy-service
+    ports:
+      - "8083:8083"
+    networks:
+      - stationerycontrol-net
+
+  certificate-api:
+    build: StationeryControl-Certificate-API
+    image: hikozzaru/stationerycontrol-certificate-api
+    restart: always
+    environment:
+      - spring.profiles.active=docker
+    volumes:
+      - ./data:/home/spring
+    depends_on:
+      - discovery-service
+      - reverseproxy-service
+    ports:
+      - "8084:8084"
+    networks:
+      - stationerycontrol-net
+
+  delivery-api:
+    build: StationeryControl-Delivery-API
+    image: hikozzaru/stationerycontrol-delivery-api
+    restart: always
+    environment:
+      - spring.profiles.active=docker
+    volumes:
+      - ./data:/home/spring
+    depends_on:
+      - discovery-service
+      - reverseproxy-service
+    ports:
+      - "8085:8085"
+    networks:
+      - stationerycontrol-net
+
+networks:
+  stationerycontrol-net:
+    external: false
