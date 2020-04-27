@@ -19,14 +19,49 @@ First we need download the follow repositories:
 In the root folder where we download the repositories we download this repository. Should be like the follow example:
 
 .
-    ├── StationeryControl-Discovery-Service/
-    ├── StationeryControl-ReverseProxy-Service/
-    ├── StationeryControl-User-API/
-    ├── StationeryControl-Certificate-API/
-    ├── StationeryControl-Delivery-API/
-    ├── docker-compose.yml
-    ├── LICENSE
-    └── README.md
+├── StationeryControl-Discovery-Service/
+│   ├── src/
+│   │   └── ...
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── LICENSE
+│   ├── README.md
+│   └── pom.xml
+├── StationeryControl-ReverseProxy-Service/
+│   ├── src/
+│   │   └── ...
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── LICENSE
+│   ├── README.md
+│   └── pom.xml
+├── StationeryControl-User-API/
+│   ├── src/
+│   │   └── ...
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── LICENSE
+│   ├── README.md
+│   └── pom.xml
+├── StationeryControl-Certificate-API/
+│   ├── src/
+│   │   └── ...
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── LICENSE
+│   ├── README.md
+│   └── pom.xml
+├── StationeryControl-Delivery-API/
+│   ├── src/
+│   │   └── ...
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── LICENSE
+│   ├── README.md
+│   └── pom.xml
+├── docker-compose.yml
+├── LICENSE
+└── README.md
 
 ## Build
 
