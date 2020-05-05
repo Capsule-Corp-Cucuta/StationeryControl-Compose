@@ -1,7 +1,8 @@
 version: "3"
 services:
   discovery-service:
-    build: StationeryControl-Discovery-Service
+    container_name: discovery-service
+    build: ../StationeryControl-Discovery-Service
     image: hikozzaru/stationerycontrol-discovery
     restart: always
     environment:
@@ -12,7 +13,8 @@ services:
       - stationerycontrol-net
 
   reverseproxy-service:
-    build: StationeryControl-ReverseProxy-Service
+    container_name: reverseproxy-service
+    build: ../StationeryControl-ReverseProxy-Service
     image: hikozzaru/stationerycontrol-reverseproxy
     restart: always
     environment:
@@ -21,11 +23,14 @@ services:
       - discovery-service
     ports:
       - "8080:8080"
+    external_links:
+        - stationerycontrol-web
     networks:
       - stationerycontrol-net
 
   user-api:
-    build: StationeryControl-User-API
+    container_name: user-api
+    build: ../StationeryControl-User-API
     image: hikozzaru/stationerycontrol-user-api
     restart: always
     environment:
@@ -41,7 +46,8 @@ services:
       - stationerycontrol-net
 
   certificate-api:
-    build: StationeryControl-Certificate-API
+    container_name: certificate-api
+    build: ../StationeryControl-Certificate-API
     image: hikozzaru/stationerycontrol-certificate-api
     restart: always
     environment:
@@ -57,7 +63,8 @@ services:
       - stationerycontrol-net
 
   delivery-api:
-    build: StationeryControl-Delivery-API
+    container_name: delivery-api
+    build: ../StationeryControl-Delivery-API
     image: hikozzaru/stationerycontrol-delivery-api
     restart: always
     environment:
@@ -67,6 +74,7 @@ services:
     depends_on:
       - discovery-service
       - reverseproxy-service
+      - certificate-api
     ports:
       - "8085:8085"
     networks:
