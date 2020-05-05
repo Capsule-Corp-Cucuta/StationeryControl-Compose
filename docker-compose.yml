@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   discovery-service:
     container_name: discovery-service
@@ -8,7 +8,7 @@ services:
     environment:
       - spring.profiles.active=docker
     ports:
-      - "8081:8081"
+      - '8081:8081'
     networks:
       - stationerycontrol-net
 
@@ -22,9 +22,9 @@ services:
     depends_on:
       - discovery-service
     ports:
-      - "8080:8080"
+      - '8080:8080'
     external_links:
-        - stationerycontrol-web
+      - stationerycontrol-web
     networks:
       - stationerycontrol-net
 
@@ -41,7 +41,7 @@ services:
       - discovery-service
       - reverseproxy-service
     ports:
-      - "8083:8083"
+      - '8083:8083'
     networks:
       - stationerycontrol-net
 
@@ -58,7 +58,7 @@ services:
       - discovery-service
       - reverseproxy-service
     ports:
-      - "8084:8084"
+      - '8084:8084'
     networks:
       - stationerycontrol-net
 
@@ -76,7 +76,23 @@ services:
       - reverseproxy-service
       - certificate-api
     ports:
-      - "8085:8085"
+      - '8085:8085'
+    networks:
+      - stationerycontrol-net
+
+  stationerycontrol-web:
+    container_name: stationerycontrol-web
+    build: ../StationeryControl-WEB
+    image: hikozzaru/stationerycontrol-web
+    restart: always
+    depends_on:
+      - discovery-service
+      - reverseproxy-service
+      - user-api
+      - certificate-api
+      - delivery-api
+    ports:
+      - '80:80'
     networks:
       - stationerycontrol-net
 
