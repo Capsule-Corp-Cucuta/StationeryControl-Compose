@@ -60,9 +60,10 @@ In the root folder where we download the repositories we download this repositor
 │   ├── LICENSE
 │   ├── README.md
 │   └── pom.xml
-├── docker-compose.yml
-├── LICENSE
-└── README.md
+└── StationeryControl-Compose
+	├── docker-compose.yml
+	├── LICENSE
+	└── README.md
 ```
 
 ## Build
